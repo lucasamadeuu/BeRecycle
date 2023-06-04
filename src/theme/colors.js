@@ -1,12 +1,12 @@
 const Colors = {
-    primary: '#0A3180',
-    secondary: '#55AC68',
+    primary: '#2ECC71',
+    secondary: '#2A424F',
     white: '#FFFF',
     baseBackground: '#FCFCFC',
-    lightGrey: '#A3A3A3',
+    lightGrey: '#ABABAB',
     darkGrey: '#202020',
     error: '#EA5345',
-    inputBackground: '#EBEBEB',
+    inputBackground: '#F9F9F9',
     textDark: '#808080',
     textLight: '#7E7E7E'
 }

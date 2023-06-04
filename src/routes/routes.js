@@ -48,7 +48,7 @@ export default function StackNavigator() {
             name="Cadastrar"
             component={navigationSignUp}
             options={{
-              headerShown: true,
+              headerShown: false,
               gestureEnabled: true,
               cardOverlayEnabled: true,
             }}

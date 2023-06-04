@@ -3,13 +3,12 @@ import Colors from "../../theme/colors";
 
 export default StyleSheet.create({
   container: {
-    padding: 10,
+    padding: 0,
     display: "flex",
-    marginBottom: 20,
     width: '100%'
   },
   input: {
-    height: 40,
+    height: 45,
     borderRadius: 5,
     padding: 10,
     backgroundColor: Colors.inputBackground,

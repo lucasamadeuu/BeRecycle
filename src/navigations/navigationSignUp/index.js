@@ -8,39 +8,41 @@ const Tab = createMaterialTopTabNavigator();
 
 const NavTop = () => {
   return (
-    <Tab.Navigator
-      barStyle={{
-        backgroundColor: Colors.baseBackground,
-        paddingBottom: "1%",
-        paddingTop: "1%",
-      }}
-      screenOptions={({ route }) => ({
-        tabBarActiveTintColor: Colors.primary,
-        tabBarInactiveTintColor: Colors.lightGrey,
-        tabBarLabelStyle: {
-          fontSize: 11,
-        },
-      })}
-    >
-      <Tab.Screen
-        name="Doador"
-        initialParams={{ userType: "Doador" }}
-        component={SignUp}
-        options={{ tabBarLabel: "Doador" }}
-      />
-      <Tab.Screen
-        name="Beneficiario"
-        initialParams={{ userType: "Beneficiario" }}
-        component={SignUp}
-        options={{ tabBarLabel: "Beneficiário" }}
-      />
-      <Tab.Screen
-        name="Transportador"
-        initialParams={{ userType: "Transportador" }}
-        component={SignUp}
-        options={{ tabBarLabel: "Transportador" }}
-      />
-    </Tab.Navigator>
+    <SafeArea>
+      <Tab.Navigator
+        barStyle={{
+          backgroundColor: Colors.baseBackground,
+          paddingBottom: "1%",
+          paddingTop: "1%",
+        }}
+        screenOptions={({ route }) => ({
+          tabBarActiveTintColor: Colors.primary,
+          tabBarInactiveTintColor: Colors.lightGrey,
+          tabBarLabelStyle: {
+            fontSize: 11,
+          },
+        })}
+      >
+        <Tab.Screen
+          name="Doador"
+          initialParams={{ userType: "Doador" }}
+          component={SignUp}
+          options={{ tabBarLabel: "Doador" }}
+        />
+        <Tab.Screen
+          name="Beneficiario"
+          initialParams={{ userType: "Beneficiario" }}
+          component={SignUp}
+          options={{ tabBarLabel: "Beneficiário" }}
+        />
+        <Tab.Screen
+          name="Transportador"
+          initialParams={{ userType: "Transportador" }}
+          component={SignUp}
+          options={{ tabBarLabel: "Transportador" }}
+        />
+      </Tab.Navigator>
+    </SafeArea>
   );
 };
 

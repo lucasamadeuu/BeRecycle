@@ -9,8 +9,8 @@ export default function UserInfo({ userData }) {
   moment.locale("pt-br");
   let date = moment().format("DD MMMM");
 
-  const { username, title } = JSON.parse(userData);
-  const firstName = username.split(" ")[0];
+  const { email, title } = JSON.parse(userData);
+  const firstName = email.split(" ")[0];
   const capitalizedUsername =
     firstName.charAt(0).toUpperCase() + firstName.slice(1);
   const firstLetter = capitalizedUsername.charAt(0);

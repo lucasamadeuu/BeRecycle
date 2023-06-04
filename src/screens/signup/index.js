@@ -1,10 +1,14 @@
-import { ScrollView, Text, View } from "react-native";
+import { Pressable, ScrollView, Text, View } from "react-native";
 import SignUpForm from "../../components/signupform";
 import { useEffect, useReducer, useState } from "react";
 import Button from "../../components/button";
 import Colors from "../../theme/colors";
 import RegularText from "../../components/texts";
-import { hasCnh, hasCnpj, hasEmail, hasEndereco, hasName, hasPassword, hasPhone, hasVehicle } from "../../context/validForm";
+import { hasCep, hasCnh, hasCnpj, hasEmail, hasEndereco, hasName, hasPassword, hasPhone, hasVehicle } from "../../context/validForm";
+import Svgs from "../../../assets/images/svgs";
+import SafeArea from "../../components/safeArea";
+import { SvgXml } from "react-native-svg";
+import style from "./style";
 
 export default function SignUp({ navigation, route }) {
     const { userType } = route.params;
@@ -14,9 +18,10 @@ export default function SignUp({ navigation, route }) {
     const [phone, setPhone] = useState('')
     const [password, setPassword] = useState('')
     const [cnpj, setCnpj] = useState('')
-    const [address, setAddres] = useState('')
+    const [cep, setCep] = useState('')
     const [cnh, setCnh] = useState('')
     const [vehicle, setVehicle] = useState('')
+    const Logo = Svgs.logo;
 
     console.log(form)
 
@@ -38,10 +43,10 @@ export default function SignUp({ navigation, route }) {
             } else {
                 setVehicle('');
             }
-            if (!hasEndereco(form.address)) {
-                setAddres('Preencha o endereço corretamente - ex: Rua Europa, SP - 13');
+            if (!hasCep(form.cep)) {
+                setCep('Preencha o cep corretamente');
             } else {
-                setAddres('');
+                setCep('');
             }
             if (!hasEmail(form.email)) {
                 setEmail('Preencha o e-mail corretamente');
@@ -69,7 +74,7 @@ export default function SignUp({ navigation, route }) {
                 setCnh('');
             }
         }
-    }, [isSignUpClicked, form.name, form.email, form.phone, form.pass, form.cnpj, form.address, form.cnh, form.vehicle]);
+    }, [isSignUpClicked, form.name, form.email, form.phone, form.pass, form.cnpj, form.cep, form.cnh, form.vehicle]);
 
     const CallBack = (key, value) => {
         var clone = Object.assign({}, form)
@@ -85,7 +90,7 @@ export default function SignUp({ navigation, route }) {
         [
             {
                 name: 'name',
-                label: 'nome',
+                label: 'Nome *',
                 value: form.name,
                 placeholder: 'nome completo',
                 CallBack: CallBack,
@@ -97,7 +102,7 @@ export default function SignUp({ navigation, route }) {
             },
             {
                 name: 'email',
-                label: 'e-mail',
+                label: 'E-mail *',
                 value: form.email,
                 placeholder: 'e-mail',
                 CallBack: CallBack,
@@ -108,21 +113,33 @@ export default function SignUp({ navigation, route }) {
                 error: email
             },
             {
-                name: 'address',
-                label: 'endereço',
-                value: form.address,
-                placeholder: 'endereço',
+                name: 'cep',
+                label: 'Cep *',
+                value: form.cep,
+                placeholder: 'cep',
                 CallBack: CallBack,
-                keyboard: 'default',
-                max: 250,
+                keyboard: 'phone-pad',
+                max: 8,
+                secure: false,
+                hasMask: true,
+                typeMask: 'zip-code',
+                error: cep
+            },
+            {
+                name: 'housenumber',
+                label: 'Número casa',
+                value: form.housenumber,
+                placeholder: 'número casa',
+                CallBack: CallBack,
+                keyboard: 'phone-pad',
+                max: 8,
                 secure: false,
                 hasMask: false,
-                error: address
-
+                error: ''
             },
             {
                 name: 'phone',
-                label: 'telefone',
+                label: 'Telefone *',
                 value: form.phone,
                 placeholder: 'telefone',
                 CallBack: CallBack,
@@ -135,7 +152,7 @@ export default function SignUp({ navigation, route }) {
             },
             {
                 name: 'cnpj',
-                label: 'CNPJ',
+                label: 'CNPJ *',
                 value: form.cnpj,
                 placeholder: 'cnpj',
                 CallBack: CallBack,
@@ -148,7 +165,7 @@ export default function SignUp({ navigation, route }) {
             },
             {
                 name: 'pass',
-                label: 'senha',
+                label: 'Senha *',
                 value: form.pass,
                 placeholder: 'senha',
                 CallBack: CallBack,
@@ -162,7 +179,7 @@ export default function SignUp({ navigation, route }) {
         [
             {
                 name: 'name',
-                label: 'nome completo',
+                label: 'Nome *',
                 value: form.name,
                 placeholder: 'nome completo',
                 CallBack: CallBack,
@@ -174,7 +191,7 @@ export default function SignUp({ navigation, route }) {
             },
             {
                 name: 'email',
-                label: 'e-mail',
+                label: 'E-mail *',
                 value: form.email,
                 placeholder: 'e-mail',
                 CallBack: CallBack,
@@ -185,21 +202,33 @@ export default function SignUp({ navigation, route }) {
                 error: email
             },
             {
-                name: 'address',
-                label: 'endereço',
-                value: form.address,
-                placeholder: 'endereço',
+                name: 'cep',
+                label: 'Cep *',
+                value: form.cep,
+                placeholder: 'cep',
                 CallBack: CallBack,
-                keyboard: 'default',
-                max: 250,
+                keyboard: 'phone-pad',
+                max: 8,
+                secure: false,
+                hasMask: true,
+                typeMask: 'zip-code',
+                error: cep
+            },
+            {
+                name: 'housenumber',
+                label: 'Número casa',
+                value: form.housenumber,
+                placeholder: 'número',
+                CallBack: CallBack,
+                keyboard: 'phone-pad',
+                max: 8,
                 secure: false,
                 hasMask: false,
-                error: address
-
+                error: ''
             },
             {
                 name: 'phone',
-                label: 'telefone',
+                label: 'Telefone *',
                 value: form.phone,
                 placeholder: 'telefone',
                 CallBack: CallBack,
@@ -212,7 +241,7 @@ export default function SignUp({ navigation, route }) {
             },
             {
                 name: 'pass',
-                label: 'senha',
+                label: 'Senha *',
                 value: form.pass,
                 placeholder: 'senha',
                 CallBack: CallBack,
@@ -226,7 +255,7 @@ export default function SignUp({ navigation, route }) {
         [
             {
                 name: 'name',
-                label: 'nome completo',
+                label: 'Nome *',
                 value: form.name,
                 placeholder: 'nome completo',
                 CallBack: CallBack,
@@ -238,7 +267,7 @@ export default function SignUp({ navigation, route }) {
             },
             {
                 name: 'email',
-                label: 'e-mail',
+                label: 'E-mail *',
                 value: form.email,
                 placeholder: 'e-mail',
                 CallBack: CallBack,
@@ -249,21 +278,33 @@ export default function SignUp({ navigation, route }) {
                 error: email
             },
             {
-                name: 'address',
-                label: 'endereço',
-                value: form.address,
-                placeholder: 'endereço',
+                name: 'cep',
+                label: 'Cep *',
+                value: form.cep,
+                placeholder: 'cep',
                 CallBack: CallBack,
-                keyboard: 'default',
-                max: 250,
+                keyboard: 'phone-pad',
+                max: 8,
+                secure: false,
+                hasMask: true,
+                typeMask: 'zip-code',
+                error: cep
+            },
+            {
+                name: 'housenumber',
+                label: 'número casa',
+                value: form.housenumber,
+                placeholder: 'número',
+                CallBack: CallBack,
+                keyboard: 'phone-pad',
+                max: 8,
                 secure: false,
                 hasMask: false,
-                error: address
-
+                error: ''
             },
             {
                 name: 'phone',
-                label: 'telefone',
+                label: 'Telefone *',
                 value: form.phone,
                 placeholder: 'telefone',
                 CallBack: CallBack,
@@ -276,7 +317,7 @@ export default function SignUp({ navigation, route }) {
             },
             {
                 name: 'cnh',
-                label: 'cnh',
+                label: 'Cnh *',
                 value: form.cnh,
                 placeholder: 'cnh',
                 CallBack: CallBack,
@@ -288,7 +329,7 @@ export default function SignUp({ navigation, route }) {
             },
             {
                 name: 'vehicle',
-                label: 'Placa do veículo',
+                label: 'Placa do veículo *',
                 value: form.vehicle,
                 placeholder: 'Placa do veículo',
                 CallBack: CallBack,
@@ -300,7 +341,7 @@ export default function SignUp({ navigation, route }) {
             },
             {
                 name: 'pass',
-                label: 'senha',
+                label: 'Senha *',
                 value: form.pass,
                 placeholder: 'senha',
                 CallBack: CallBack,
@@ -325,14 +366,38 @@ export default function SignUp({ navigation, route }) {
     }
 
     return (
-        <ScrollView>
+        <ScrollView style={{ backgroundColor: Colors.white }}>
+            <View style={{ width: '100%', display: 'flex', alignItems: 'center', paddingTop: 50, paddingBottom: 30 }}>
+                <SvgXml xml={Logo} />
+                <Text
+                    style={{
+                        textAlign: "center",
+                        fontFamily: "Poppins-Medium",
+                        fontSize: 14,
+                        color: Colors.lightGrey,
+                        paddingLeft: 70,
+                        paddingRight: 70,
+                        paddingTop: 15
+                    }}
+                >
+                    Juntos, por um mundo mais verde e sustentável
+                </Text>
+            </View>
+
             <SignUpForm formItems={checkUserType()} />
-            <View style={{ width: "70%", alignSelf: "center" }}>
+            <View style={{ width: "70%", alignSelf: "center", paddingBottom: 20 }}>
                 <Button
                     action={() => SignUp()}
                     text="Cadastrar"
-                    color={Colors.primary}
+                    color={Colors.secondary}
                 />
+            </View>
+            <View style={style.accountContainer}>
+                <RegularText weight='Regular' color={Colors.textLight} fontSize={12} content={"Já possui uma conta?"} />
+                <View style={{ padding: 2 }}></View>
+                <Pressable onPress={() => navigation.navigate("Login")}>
+                    <RegularText weight='Medium' color={Colors.primary} fontSize={12} content={"Faça login"} />
+                </Pressable>
             </View>
         </ScrollView>
     );

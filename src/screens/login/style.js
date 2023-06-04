@@ -5,29 +5,26 @@ export default StyleSheet.create({
   container: {
     display: "flex",
     width: "100%",
-    padding: 30,
+    padding: 20,
   },
   mainContainer: {
-    backgroundColor: Colors.inputBackground,
+    backgroundColor: Colors.white,
     height: "100%",
     alignItems: "center",
     paddingTop: '20%'
   },
   formContainer: {
-    backgroundColor: Colors.baseBackground,
-    borderRadius: 10,
     paddingTop: 50,
     marginTop: '15%',
     display: 'flex',
-    alignItems: 'center',
-  },
-  accountContainer: {
-    bottom: 0,
-    display: 'flex',
-    flexDirection: 'row',
+    alignItems: 'flex-start',
   },
   all: {
     display: 'flex',
     justifyContent: 'space-between'
+  },
+  messageNotFound: {
+    marginBottom: 30,
+    marginTop: -10
   }
 });

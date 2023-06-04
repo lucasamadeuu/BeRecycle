@@ -11,6 +11,8 @@ const Tab = createMaterialBottomTabNavigator();
 const NavBottom = ({ route }) => {
   const { userData } = route.params;
 
+  console.log(userData)
+
   const CustomIcon = createIconSetFromFontello(
     require("../../../assets/images/config.json"),
     "fontello"

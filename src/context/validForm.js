@@ -48,3 +48,8 @@ export const hasCnh = (cnh) => {
 
     return cnh.length >= 7;
 }
+
+export const hasCep = (cep) => {
+    const regexCep = /^\d{5}-\d{3}$/;
+    return regexCep.test(cep);
+};
