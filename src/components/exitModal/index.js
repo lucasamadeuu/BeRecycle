@@ -7,11 +7,11 @@ import styles from "./style";
 import RegularText from "../texts";
 
 export default function ExitModal({ navigation, route }) {
-  const { openModal, userData } = route.params;
+  const { userData } = route.params;
+  const { type, name } = JSON.parse(userData);
 
-  const { title } = JSON.parse(userData);
-
-  console.log(title)
+  const partsName = name.split(" ");
+  const firstName = partsName[0];
 
   const logout = () => {
     navigation.reset({
@@ -21,39 +21,27 @@ export default function ExitModal({ navigation, route }) {
   };
 
   const cancel = () => {
-    if (title == "teacher") {
-      navigation.reset({
-        index: 0,
-        routes: [{ name: "Navigation" }],
-      });
-    } else {
-      navigation.reset({
-        index: 0,
-        routes: [{ name: "NavigationBeneficiario" }],
-      });
-    }
+    navigation.navigate("Home")
   };
 
   return (
-    <ReactNativeModal isVisible={openModal} style={styles.container}>
-      <View>
-        <View style={{ marginBottom: 50 }}>
-          <RegularText
-            weight="Regular"
-            color={Colors.textLight}
-            fontSize={14}
-            content="Tem certeza que deseja sair?"
-          />
+    <View style={styles.container}>
+      <View style={{ marginBottom: 50 }}>
+        <RegularText
+          weight="Regular"
+          color={Colors.textLight}
+          fontSize={14}
+          content={`${firstName}, tem certeza que deseja sair?`}
+        />
+      </View>
+      <View style={{ width: '100%' }}>
+        <View style={{ marginBottom: 15, width: '100%' }}>
+          <Button action={logout} text="logout" color={Colors.primary} />
         </View>
         <View>
-          <View style={{ marginBottom: 15 }}>
-            <Button action={logout} text="logout" color={Colors.primary} />
-          </View>
-          <View>
-            <Button action={cancel} text="cancelar" color={Colors.error} />
-          </View>
+          <Button action={cancel} text="cancelar" color={Colors.secondary} />
         </View>
       </View>
-    </ReactNativeModal>
+    </View>
   );
 }

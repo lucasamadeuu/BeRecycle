@@ -35,18 +35,8 @@ const NavBottom = ({ route }) => {
         }}
       />
 
-      <Tab.Screen name="Classes" component={Classes}
-        initialParams={{ userData }}
-        options={{
-          tabBarLabel: "Turmas",
-          tabBarIcon: ({ color }) => (
-            <CustomIcon name="classes" color={color} size={24} />
-          ),
-        }}
-      />
-
       <Tab.Screen name="Exit" component={ExitModal}
-        initialParams={{ openModal: true, userData }}
+        initialParams={{ userData }}
         options={{
           tabBarLabel: "Sair",
           tabBarIcon: ({ color }) => (

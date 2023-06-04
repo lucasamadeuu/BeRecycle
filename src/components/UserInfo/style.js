@@ -11,7 +11,6 @@ export default StyleSheet.create({
     letterIcon: {
         display: "flex",
         width: 50,
-        paddingTop: 5,
         height: 50,
         backgroundColor: Colors.primary,
         borderRadius: 10,

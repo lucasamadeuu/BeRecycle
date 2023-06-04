@@ -2,8 +2,7 @@ import { createMaterialBottomTabNavigator } from "@react-navigation/material-bot
 import Colors from "../../theme/colors";
 import ExitModal from "../../components/exitModal";
 
-import Home from "../../screens/homeStudent/index";
-import Grades from "../../screens/grades/index";
+import Home from "../../screens/beneficiario/home/index";
 import { createIconSetFromFontello } from "react-native-vector-icons";
 
 const Tab = createMaterialBottomTabNavigator();
@@ -29,16 +28,6 @@ const NavBottom = ({ route }) => {
           tabBarLabel: "Home",
           tabBarIcon: ({ color }) => (
             <CustomIcon name="home" color={color} size={24} />
-          ),
-        }}
-      />
-
-      <Tab.Screen name="Classes" component={Grades}
-        initialParams={{ userData }}
-        options={{
-          tabBarLabel: "Boletim",
-          tabBarIcon: ({ color }) => (
-            <CustomIcon name="grades" color={color} size={24} />
           ),
         }}
       />
