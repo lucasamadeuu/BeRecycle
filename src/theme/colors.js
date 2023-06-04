@@ -4,11 +4,12 @@ const Colors = {
     white: '#FFFF',
     baseBackground: '#FCFCFC',
     lightGrey: '#ABABAB',
+    cardBackground: '#F2F2F2',
     darkGrey: '#202020',
     error: '#EA5345',
     inputBackground: '#F9F9F9',
-    textDark: '#808080',
-    textLight: '#7E7E7E'
+    textDark: '#686868',
+    textLight: '#ADADAD'
 }
 
 export default Colors;

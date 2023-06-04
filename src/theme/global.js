@@ -1,9 +1,11 @@
 import { StyleSheet } from "react-native";
+import Colors from "./colors";
 
 export default StyleSheet.create({
-    container: {
+    allPage: {
+        backgroundColor: Colors.white,
         paddingTop: 60,
         paddingLeft: 35,
-        paddingRight: 35
+        paddingRight: 35,
     }
 });

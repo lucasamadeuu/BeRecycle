@@ -1,4 +1,4 @@
-import { View } from "react-native"
+import { StatusBar, View } from "react-native"
 import SafeArea from "../../../components/safeArea";
 import UserInfo from "../../../components/UserInfo";
 import global from "../../../theme/global";

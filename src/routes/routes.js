@@ -5,59 +5,68 @@ import NavigationBeneficiario from "../navigations/navigationBeneficiario/index"
 import navigationSignUp from "../navigations/navigationSignUp/index"
 
 import Login from "../screens/login/index";
-import Home from "../screens/home/index";
-import Classes from "../screens/classes/index";
+import Home from "../screens/doador/home/index";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import SignUp from "../screens/signup";
+import Colors from "../theme/colors";
+import { StatusBar } from "react-native";
+import DonationInfo from "../components/donationInfo/index";
 
 const Stack = createNativeStackNavigator();
 
 export default function StackNavigator() {
   return (
-    <SafeAreaProvider>
-      <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen
-            name="Login"
-            component={Login}
-            options={{
+    <>
+      <StatusBar backgroundColor={Colors.white} barStyle="dark-content" />
+      <SafeAreaProvider>
+        <NavigationContainer>
+          <Stack.Navigator>
+            <Stack.Screen
+              name="Login"
+              component={Login}
+              options={{
+                headerShown: false,
+                gestureEnabled: true,
+                cardOverlayEnabled: true,
+              }}
+            />
+            <Stack.Screen
+              name="NavigationDoador"
+              component={NavigationDoador}
+              options={{
+                headerShown: false,
+                gestureEnabled: true,
+                cardOverlayEnabled: true,
+              }}
+            />
+            <Stack.Screen
+              name="NavigationBeneficiario"
+              component={NavigationBeneficiario}
+              options={{
+                headerShown: false,
+                gestureEnabled: true,
+                cardOverlayEnabled: true,
+              }}
+            />
+            <Stack.Screen
+              name="Cadastrar"
+              component={navigationSignUp}
+              options={{
+                headerShown: false,
+                gestureEnabled: true,
+                cardOverlayEnabled: true,
+              }}
+            />
+            <Stack.Screen name="SignUp" component={SignUp} />
+            <Stack.Screen name="Home" component={Home} />
+            <Stack.Screen options={{
               headerShown: false,
               gestureEnabled: true,
               cardOverlayEnabled: true,
-            }}
-          />
-          <Stack.Screen
-            name="NavigationDoador"
-            component={NavigationDoador}
-            options={{
-              headerShown: false,
-              gestureEnabled: true,
-              cardOverlayEnabled: true,
-            }}
-          />
-          <Stack.Screen
-            name="NavigationBeneficiario"
-            component={NavigationBeneficiario}
-            options={{
-              headerShown: false,
-              gestureEnabled: true,
-              cardOverlayEnabled: true,
-            }}
-          />
-          <Stack.Screen
-            name="Cadastrar"
-            component={navigationSignUp}
-            options={{
-              headerShown: false,
-              gestureEnabled: true,
-              cardOverlayEnabled: true,
-            }}
-          />
-          <Stack.Screen name="SignUp" component={SignUp} />
-          <Stack.Screen name="Home" component={Home} />
-          <Stack.Screen name="Classes" component={Classes} />
-        </Stack.Navigator>
-      </NavigationContainer>
-    </SafeAreaProvider>
+            }} name="Donation" component={DonationInfo} />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </SafeAreaProvider>
+    </>
   );
 }
