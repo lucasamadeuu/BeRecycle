@@ -23,8 +23,6 @@ export default function SignUp({ navigation, route }) {
     const [vehicle, setVehicle] = useState('')
     const Logo = Svgs.logo;
 
-    console.log(form)
-
     useEffect(() => {
         CallBack('type', userType)
     }, [])
@@ -54,7 +52,7 @@ export default function SignUp({ navigation, route }) {
                 setEmail('');
             }
             if (!hasPhone(form.phone)) {
-                setPhone('Preencha o telefone corretamente');
+                setPhone('Preencha o telefone corretamente - ex : (11) xxxxx-xxxx');
             } else {
                 setPhone('');
             }
@@ -82,9 +80,58 @@ export default function SignUp({ navigation, route }) {
         setForm(clone)
     }
 
+    const Validate = () => {
+        switch (userType) {
+            case 'Doador':
+                return (form.name && form.email && form.cep && form.phone && form.cnpj && form.pass) ? true : false
+            case 'Beneficiario':
+                return (form.name && form.email && form.cep && form.phone && form.pass) ? true : false
+            case 'Transportador':
+                return (form.name && form.email && form.cep && form.phone && form.cnh && form.vehicle && form.pass) ? true : false
+            default:
+                return false
+        }
+
+    }
+
+    const Route = () => {
+        // const userJSON = JSON.stringify(form);
+
+        const teste = {
+            type: "Doador",
+            name: "Lucas Amadeu",
+            email: "lucas.amadeu.soares@gmail.com",
+            cep: "04115-060",
+            housenumber: "375",
+            phone: "(11) 95078-2114",
+            cnpj: "13.689.468/3134-97",
+            pass: "qpaozkska"
+        };
+
+        const userJSON = JSON.stringify(teste);
+
+        if (form.type == "Doador") {
+            navigation.navigate("NavigationDoador", { userData: userJSON });
+        } else if (form.type == "Beneficiario") {
+            navigation.navigate("NavigationBeneficiario", { userData: userJSON });
+        } else {
+            //aqui para transportador
+        }
+    }
+
     const SignUp = () => {
         setIsSignUpClicked(true)
+        // DESCOMENTAR DEPOIS
+        // ValidateForm()
+        Route()
     }
+
+    const ValidateForm = () => {
+        (Validate())
+            ? Route()
+            : ''
+    }
+
 
     const formItems = [
         [
@@ -372,7 +419,7 @@ export default function SignUp({ navigation, route }) {
                 <Text
                     style={{
                         textAlign: "center",
-                        fontFamily: "Poppins-Medium",
+                        fontFamily: "Roboto-Medium",
                         fontSize: 14,
                         color: Colors.lightGrey,
                         paddingLeft: 70,

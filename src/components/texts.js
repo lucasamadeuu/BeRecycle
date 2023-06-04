@@ -2,9 +2,9 @@ import { Text } from "react-native";
 
 export default function RegularText({ color, content, weight, fontSize }) {
 
-    const poppins = `Poppins-${weight}`
+    const roboto = `Roboto-${weight}`
 
     return (
-        <Text style={{ color: color, fontFamily: poppins, fontSize: fontSize }}>{content}</Text>
+        <Text style={{ color: color, fontFamily: roboto, fontSize: fontSize }}>{content}</Text>
     )
 }

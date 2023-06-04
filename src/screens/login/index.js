@@ -113,7 +113,7 @@ export default function Login({ navigation }) {
           <Text
             style={{
               textAlign: "center",
-              fontFamily: "Poppins-Medium",
+              fontFamily: "Roboto-Medium",
               fontSize: 14,
               color: Colors.lightGrey,
               paddingLeft: 70,

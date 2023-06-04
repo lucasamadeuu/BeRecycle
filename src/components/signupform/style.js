@@ -12,8 +12,9 @@ export default StyleSheet.create({
     height: 40,
     borderRadius: 5,
     padding: 10,
+    marginTop: 5,
     backgroundColor: Colors.inputBackground,
     fontSize: 10,
-    fontFamily: 'Poppins-Regular',
+    fontFamily: 'Roboto-Regular',
   },
 });
