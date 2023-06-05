@@ -14,23 +14,17 @@ export default function Home({ route, navigation }) {
         {
             name: 'Lucas Amadeu',
             description: '1x cesta básica contendo:',
-            cep: cep
+            cep: cep,
+            email: 'lucas.amadeu.soares@gmail.com',
+            phone: '(11) 95078-2114'
         },
         {
             name: 'David Augusto',
             description: '1x caixa com aspargos',
-            cep: cep
+            cep: cep,
+            email: 'david086@gmail.com',
+            phone: '(11) 99653-1071'
         },
-        {
-            name: 'David Augusto',
-            description: '1x caixa com aspargos',
-            cep: cep
-        },
-        {
-            name: 'David Augusto',
-            description: '1x caixa com aspargos',
-            cep: cep
-        }
     ]
 
     return (

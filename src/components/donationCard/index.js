@@ -9,6 +9,7 @@ import { useEffect } from "react";
 import { getAxios } from "../../context/Integration";
 import { Pressable } from "react-native";
 import { TouchableOpacity } from "react-native";
+import InfoCard from "../InfoCard";
 
 export default function DonationCard({ donationData, navigation, userData }) {
 
@@ -39,16 +40,25 @@ export default function DonationCard({ donationData, navigation, userData }) {
         },
     ]
 
+    const donorContactInfo = [
+        {
+            email: donationData.email,
+            phone: donationData.phone
+        }
+    ]
+
     return (
-        <TouchableOpacity onPress={() => navigation.navigate("Donation", { userData: userData })}>
+        <TouchableOpacity onPress={() => navigation.navigate("Donation", { userData: userData, CardContent: CardContent, donorContactInfo: donorContactInfo })}>
             <View style={style.cardContainer}>
                 <View style={style.infoContainer}>
                     {CardContent.map((item, index) => {
                         return (
-                            <View key={index}>
-                                <RegularText weight='Bold' color={Colors.textDark} fontSize={12} content={item.label} />
-                                <RegularText weight='Regular' color={Colors.textLight} fontSize={12} content={item.content} />
-                            </View>
+                            <InfoCard
+                                key={index}
+                                label={item.label}
+                                content={item.content}
+                                size={12}
+                            />
                         )
                     })}
                 </View>
