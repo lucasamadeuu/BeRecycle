@@ -18,13 +18,6 @@ export default function DonationCard({ donationData, navigation, userData }) {
         "fontello"
     );
 
-    const [cepData, setCepData] = useState(null);
-
-    useEffect(() => {
-        getAxios(setCepData, `https://cdn.apicep.com/file/apicep/${donationData.cep}.json`)
-    }, []);
-
-
     const CardContent = [
         {
             label: 'Doador',
@@ -36,7 +29,7 @@ export default function DonationCard({ donationData, navigation, userData }) {
         },
         {
             label: 'Localidade',
-            content: cepData ? `${cepData.city}, ${cepData.state}` : 'Carregando...'
+            content: donationData.local
         },
     ]
 

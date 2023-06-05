@@ -15,6 +15,6 @@ export default StyleSheet.create({
         gap: 15
     },
     contactContainer: {
-        paddingTop: 70
+        paddingTop: 100
     }
 });

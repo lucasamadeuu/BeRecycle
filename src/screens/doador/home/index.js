@@ -14,14 +14,14 @@ export default function Home({ route, navigation }) {
         {
             name: 'Lucas Amadeu',
             description: '1x cesta básica contendo:',
-            cep: cep,
+            local: "São Paulo, SP",
             email: 'lucas.amadeu.soares@gmail.com',
             phone: '(11) 95078-2114'
         },
         {
             name: 'David Augusto',
             description: '1x caixa com aspargos',
-            cep: cep,
+            local: "São Paulo, SP",
             email: 'david086@gmail.com',
             phone: '(11) 99653-1071'
         },

@@ -28,7 +28,7 @@ export default function DonationInfo({ navigation, route }) {
                                 key={index}
                                 label={item.label}
                                 content={item.content}
-                                size={14}
+                                size={12}
                             />
                         )
                     })}

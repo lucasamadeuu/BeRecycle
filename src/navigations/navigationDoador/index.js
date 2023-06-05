@@ -6,6 +6,7 @@ import Home from "../../screens/doador/home/index";
 import { createIconSetFromFontello } from "react-native-vector-icons";
 import { StatusBar } from "react-native";
 import { useTheme } from "@react-navigation/native";
+import CreateDonation from "../../screens/doador/create";
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -35,6 +36,16 @@ const NavBottom = ({ route }) => {
           initialParams={{ userData }}
           options={{
             tabBarLabel: "Home",
+            tabBarIcon: ({ color }) => (
+              <CustomIcon name="home" color={color} size={24} />
+            ),
+          }}
+        />
+
+        <Tab.Screen name="Criar" component={CreateDonation}
+          initialParams={{ userData }}
+          options={{
+            tabBarLabel: "Criar",
             tabBarIcon: ({ color }) => (
               <CustomIcon name="home" color={color} size={24} />
             ),

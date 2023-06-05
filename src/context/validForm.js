@@ -3,6 +3,10 @@ export const hasName = (nome) => {
     return regName.test(nome)
 }
 
+export const hasDescription = (descricao) => {
+    return descricao == undefined || descricao == ''
+}
+
 export const hasEndereco = (endereco) => {
     const regexEndereco = /^([A-Za-z]+\s[A-Za-z]+),\s([A-Za-z]{2})\s-\s\d+$/;
     return regexEndereco.test(endereco);
