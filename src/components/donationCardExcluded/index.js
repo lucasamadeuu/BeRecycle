@@ -17,8 +17,6 @@ export default function DonationCardExcluded({ donationData, navigation, userDat
 
     const [resp, setResp] = useState(null)
 
-    console.log(donationData)
-
     const CardContent = [
         {
             label: donationData.type,

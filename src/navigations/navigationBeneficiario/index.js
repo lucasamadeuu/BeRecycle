@@ -43,7 +43,7 @@ const NavBottom = ({ route }) => {
         options={{
           tabBarLabel: "Meus Posts",
           tabBarIcon: ({ color }) => (
-            <CustomIcon name="home" color={color} size={24} />
+            <CustomIcon name="post" color={color} size={24} />
           ),
         }}
       />

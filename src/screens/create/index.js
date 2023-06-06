@@ -75,8 +75,6 @@ export default function CreateDonation({ route, navigation }) {
 
     const Request = async () => {
         const donationJSON = JSON.stringify(form);
-        console.log(donationJSON)
-
         await postAxios(setResp, 'post', donationJSON)
 
         setForm({});
