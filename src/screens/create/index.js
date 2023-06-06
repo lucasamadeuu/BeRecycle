@@ -5,12 +5,12 @@ import UserInfo from "../../components/UserInfo";
 import Colors from "../../theme/colors";
 import global from "../../theme/global";
 import { ScrollView, View } from "react-native";
-import { getAxios } from "../../context/Integration";
+import { getAxios, postAxios } from "../../context/Integration";
 import CreateForm from "../../components/createform";
 import { hasDescription, hasName } from "../../context/validForm";
 import Button from "../../components/button";
 
-export default function CreateDonation({ route }) {
+export default function CreateDonation({ route, navigation }) {
     const { userData } = route.params;
     const [cepData, setCepData] = useState(null);
     const [form, setForm] = useState({});
@@ -18,6 +18,7 @@ export default function CreateDonation({ route }) {
     const [loading, setLoading] = useState(false);
     const [isLoaded, setIsLoaded] = useState(false);
     const [description, setDescription] = useState('')
+    const [signUpResp, setResp] = useState('')
 
     const CallBack = (key, value) => {
         var clone = Object.assign({}, form);
@@ -40,6 +41,8 @@ export default function CreateDonation({ route }) {
         clone['phone'] = userData.phone;
         clone['name'] = userData.name;
         clone['type'] = userData.type;
+        clone['type'] = userData.type;
+        clone['userId'] = userData.id;
         setForm(clone);
 
         setLoading(true);
@@ -70,10 +73,16 @@ export default function CreateDonation({ route }) {
             : ''
     }
 
-    const Request = () => {
+    const Request = async () => {
         const donationJSON = JSON.stringify(form);
         console.log(donationJSON)
-        // fazer post
+
+        await postAxios(setResp, 'post', donationJSON)
+
+        setForm({});
+        setIsSignUpClicked(true)
+
+        navigation.navigate('Home')
     }
 
     useEffect(() => {

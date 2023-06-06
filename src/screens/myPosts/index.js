@@ -1,16 +1,15 @@
 import { ScrollView, View } from "react-native"
 import styles from "./style";
-import DonationCard from "../../components/donationCard";
+import DonationCardExcluded from "../../components/donationCardExcluded";
 import SafeArea from "../../components/safeArea";
 import UserInfo from "../../components/UserInfo";
 import global from "../../theme/global";
 import { useEffect, useState } from "react";
-import { getInfo } from "../../context/Integration";
-import { baseUrl } from "../../services/api";
+import { getInfoById } from "../../context/Integration";
 import Loading from "../../components/loading";
 import { useIsFocused } from "@react-navigation/native";
 
-export default function Home({ route, navigation }) {
+export default function MyPosts({ route, navigation }) {
     const { userData } = route.params;
     const [resp, setResp] = useState(null)
     const [isLoading, setIsLoading] = useState(true);
@@ -23,22 +22,7 @@ export default function Home({ route, navigation }) {
     }, [resp])
 
     useEffect(() => {
-        getInfo((data) => {
-            const { content } = data;
-
-            const formattedData = content.map(({ description, email, id, name, phone, type, userId, local }) => ({
-                description,
-                email,
-                id,
-                name,
-                phone,
-                type,
-                userId,
-                local
-            }));
-
-            setResp(formattedData);
-        }, "post");
+        getInfoById(setResp, 'post/user', userData.id)
     }, [isFocused])
 
     if (isLoading) {
@@ -53,7 +37,7 @@ export default function Home({ route, navigation }) {
                     <View style={styles.donationContainer}>
                         {resp.map((item, index) => {
                             return (
-                                <DonationCard
+                                <DonationCardExcluded
                                     key={index}
                                     donationData={item}
                                     navigation={navigation}

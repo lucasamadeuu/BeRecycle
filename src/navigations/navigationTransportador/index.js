@@ -41,26 +41,6 @@ const NavBottom = ({ route }) => {
           }}
         />
 
-        <Tab.Screen name="MyPosts" component={MyPosts}
-          initialParams={{ userData }}
-          options={{
-            tabBarLabel: "Meus Posts",
-            tabBarIcon: ({ color }) => (
-              <CustomIcon name="home" color={color} size={24} />
-            ),
-          }}
-        />
-
-        <Tab.Screen name="Criar" component={CreateDonation}
-          initialParams={{ userData }}
-          options={{
-            tabBarLabel: "Criar",
-            tabBarIcon: ({ color }) => (
-              <CustomIcon name="plus" color={color} size={24} />
-            ),
-          }}
-        />
-
         <Tab.Screen name="Exit" component={ExitModal}
           initialParams={{ userData }}
           options={{

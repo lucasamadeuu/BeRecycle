@@ -27,8 +27,6 @@ export default function SignUp({ navigation, route }) {
     const [isSignUpClicked, setIsSignUpClicked] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
 
-    console.log(signUpResp)
-
     const Logo = Svgs.logo;
 
     useEffect(() => {
@@ -38,6 +36,7 @@ export default function SignUp({ navigation, route }) {
     useEffect(() => {
         if (signUpResp != '') {
             setIsLoading(false)
+            navigation.navigate("Login")
         }
     }, [signUpResp])
 
@@ -114,13 +113,7 @@ export default function SignUp({ navigation, route }) {
 
         await postAxios(setResp, 'user', userJSON)
 
-        // if (form.type == "Doador") {
-        //     navigation.navigate("NavigationDoador", { userData: userJSON });
-        // } else if (form.type == "Beneficiario") {
-        //     navigation.navigate("NavigationBeneficiario", { userData: userJSON });
-        // } else {
-        //     navigation.navigate("NavigationTransportador", { userData: userJSON });
-        // }
+
     }
 
     if (isLoading) {

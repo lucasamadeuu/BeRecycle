@@ -68,7 +68,6 @@ export default function Login({ navigation }) {
       const userJSON = JSON.stringify(data);
 
       await GetUser(setUser, 'login', userJSON)
-
     }
   };
 
