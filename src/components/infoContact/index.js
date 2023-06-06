@@ -8,8 +8,6 @@ import PhoneNumber from "libphonenumber-js";
 
 export default function InfoContact({ type, donorContactInfo }) {
 
-    console.log("asfsdfksmçdl", donorContactInfo[0].email)
-
     const phoneNumber = donorContactInfo[0].phone;
     const parsedPhoneNumber = PhoneNumber.parsePhoneNumberFromString(phoneNumber, "BR");
 

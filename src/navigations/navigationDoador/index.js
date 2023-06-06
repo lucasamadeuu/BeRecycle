@@ -13,8 +13,6 @@ const Tab = createMaterialBottomTabNavigator();
 const NavBottom = ({ route }) => {
   const { userData } = route.params;
 
-  console.log(userData)
-
   const theme = useTheme();
   theme.colors.secondaryContainer = "transperent"
 
@@ -47,7 +45,7 @@ const NavBottom = ({ route }) => {
           options={{
             tabBarLabel: "Criar",
             tabBarIcon: ({ color }) => (
-              <CustomIcon name="home" color={color} size={24} />
+              <CustomIcon name="plus" color={color} size={24} />
             ),
           }}
         />

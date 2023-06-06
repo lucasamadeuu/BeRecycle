@@ -13,7 +13,7 @@ export default function BackSection({ navigation, type }) {
                 color={Colors.primary}
                 iconColor={Colors.white}
             />
-            <RegularText weight='Bold' color={Colors.darkGrey} fontSize={18} content={`Informações da ${type}`} />
+            <RegularText weight='Bold' color={Colors.darkGrey} fontSize={18} content={`Informações ${type}`} />
         </View>
     );
 }

@@ -4,11 +4,16 @@ import ExitModal from "../../components/exitModal";
 
 import Home from "../../screens/beneficiario/home/index";
 import { createIconSetFromFontello } from "react-native-vector-icons";
+import { useTheme } from "@react-navigation/native";
+import CreateDonation from "../../screens/doador/create";
 
 const Tab = createMaterialBottomTabNavigator();
 
 const NavBottom = ({ route }) => {
   const { userData } = route.params;
+
+  const theme = useTheme();
+  theme.colors.secondaryContainer = "transperent"
 
   const CustomIcon = createIconSetFromFontello(
     require("../../../assets/images/config.json"),
@@ -28,6 +33,16 @@ const NavBottom = ({ route }) => {
           tabBarLabel: "Home",
           tabBarIcon: ({ color }) => (
             <CustomIcon name="home" color={color} size={24} />
+          ),
+        }}
+      />
+
+      <Tab.Screen name="Criar" component={CreateDonation}
+        initialParams={{ userData }}
+        options={{
+          tabBarLabel: "Criar",
+          tabBarIcon: ({ color }) => (
+            <CustomIcon name="plus" color={color} size={24} />
           ),
         }}
       />

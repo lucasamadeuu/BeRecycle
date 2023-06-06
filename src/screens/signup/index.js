@@ -108,14 +108,26 @@ export default function SignUp({ navigation, route }) {
             pass: "qpaozkska"
         };
 
-        const userJSON = JSON.stringify(teste);
+        const teste2 = {
+            type: "Beneficiario",
+            name: "Lucas Amadeu",
+            email: "lucas.amadeu.soares@gmail.com",
+            cep: "04115-060",
+            housenumber: "375",
+            phone: "(11) 95078-2114",
+            pass: "qpaozkska"
+        };
+
+        const userJSON = JSON.stringify(teste2);
+
+        console.log(userJSON)
 
         if (form.type == "Doador") {
             navigation.navigate("NavigationDoador", { userData: userJSON });
         } else if (form.type == "Beneficiario") {
             navigation.navigate("NavigationBeneficiario", { userData: userJSON });
         } else {
-            //aqui para transportador
+            navigation.navigate("NavigationTransportador", { userData: userJSON });
         }
     }
 

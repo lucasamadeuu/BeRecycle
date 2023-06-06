@@ -68,14 +68,12 @@ export default function Login({ navigation }) {
         } else if (foundUser.title == "beneficiario") {
           navigation.navigate("NavigationBeneficiario", { userData: userJSON });
         } else {
-          //aqui para transportador
+          navigation.navigate("NavigationTransportador", { userData: userJSON });
         }
       } else {
         setNotFound("E-mail ou senha incorretos");
       }
     }
-
-
   };
 
   const handleUsernameChange = (text) => {

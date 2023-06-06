@@ -86,7 +86,7 @@ export default function CreateDonation({ route }) {
             name: 'description',
             label: 'Descrição *',
             value: form.description,
-            placeholder: 'descrição da doção',
+            placeholder: type == "Doador" ? 'descrição da doação' : 'descrição dos materiais',
             CallBack: CallBack,
             keyboard: 'default',
             max: 300,
@@ -137,7 +137,7 @@ export default function CreateDonation({ route }) {
                         <UserInfo userData={userData} />
                     </View>
                     <View>
-                        <RegularText weight='Bold' color={Colors.darkGrey} fontSize={18} content={`Informações ${type == 'Doador' ? "da doação" : "penso depois"}`} />
+                        <RegularText weight='Bold' color={Colors.darkGrey} fontSize={18} content={`Informações ${type == 'Doador' ? "da doação" : "dos materiais"}`} />
                     </View>
                     {isLoaded && <CreateForm formItems={formItems} contactItems={formItemsContact} />}
                     <Button

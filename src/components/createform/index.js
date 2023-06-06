@@ -8,7 +8,7 @@ export default function CreateForm({ formItems, contactItems }) {
         <View style={styles.container}>
             {formItems.map((item, index) => (
                 <View View key={index} style={{ marginBottom: 25 }}>
-                    <RegularText weight='Regular' color={Colors.textLight} fontSize={12} content={item.label} />
+                    <RegularText weight='Bold' color={Colors.textDark} fontSize={12} content={item.label} />
                     <TextInput
                         onChangeText={(e) => item.CallBack(item.name, e)}
                         value={item.value}
@@ -36,7 +36,7 @@ export default function CreateForm({ formItems, contactItems }) {
                 <View>
                     {contactItems.map((item, index) => (
                         <View View key={index} style={{ marginBottom: 25 }}>
-                            <RegularText weight='Regular' color={Colors.textLight} fontSize={12} content={item.label} />
+                            <RegularText weight='Bold' color={Colors.textDark} fontSize={12} content={item.label} />
                             <TextInput
                                 onChangeText={(e) => item.CallBack(item.name, e)}
                                 value={item.value}

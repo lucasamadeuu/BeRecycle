@@ -12,6 +12,7 @@ import { TouchableOpacity } from "react-native";
 import InfoCard from "../InfoCard";
 
 export default function DonationCard({ donationData, navigation, userData }) {
+    const { type } = JSON.parse(userData);
 
     const CustomIcon = createIconSetFromFontello(
         require("../../../assets/images/config.json"),
@@ -20,7 +21,7 @@ export default function DonationCard({ donationData, navigation, userData }) {
 
     const CardContent = [
         {
-            label: 'Doador',
+            label: type,
             content: donationData.name
         },
         {
