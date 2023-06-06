@@ -2,10 +2,10 @@ import { createMaterialBottomTabNavigator } from "@react-navigation/material-bot
 import Colors from "../../theme/colors";
 import ExitModal from "../../components/exitModal";
 
-import Home from "../../screens/beneficiario/home/index";
+import Home from "../../screens/home/index";
 import { createIconSetFromFontello } from "react-native-vector-icons";
 import { useTheme } from "@react-navigation/native";
-import CreateDonation from "../../screens/doador/create";
+import CreateDonation from "../../screens/create";
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -48,7 +48,7 @@ const NavBottom = ({ route }) => {
       />
 
       <Tab.Screen name="Exit" component={ExitModal}
-        initialParams={{ openModal: true, userData }}
+        initialParams={{ userData }}
         options={{
           tabBarLabel: "Sair",
           tabBarIcon: ({ color }) => (

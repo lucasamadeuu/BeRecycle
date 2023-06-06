@@ -10,8 +10,9 @@ import InfoCard from "../InfoCard";
 import InfoContact from "../infoContact";
 
 export default function DonationInfo({ navigation, route }) {
-    const { userData, CardContent, donorContactInfo } = route.params;
-    const { type } = JSON.parse(userData);
+    const { userData, CardContent, donorContactInfo, donationData } = route.params;
+
+    console.log(CardContent)
 
     return (
         <SafeArea>
@@ -20,7 +21,7 @@ export default function DonationInfo({ navigation, route }) {
                     <UserInfo userData={userData} />
                 </View>
 
-                <BackSection navigation={navigation} type={type == "Doador" ? "da doação" : "dos materiais"} />
+                <BackSection navigation={navigation} type={donationData.type == "Doador" ? "da doação" : "dos materiais"} />
 
                 <View style={style.infoContainer}>
                     {CardContent.map((item, index) => {
@@ -37,7 +38,7 @@ export default function DonationInfo({ navigation, route }) {
 
                 <View style={style.contactContainer}>
                     <InfoContact
-                        type={"doador"}
+                        type={donationData.type}
                         donorContactInfo={donorContactInfo}
                     />
                 </View>

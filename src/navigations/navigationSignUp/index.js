@@ -31,7 +31,7 @@ const NavTop = () => {
         />
         <Tab.Screen
           name="Beneficiario"
-          initialParams={{ userType: "Beneficiario" }}
+          initialParams={{ userType: "Beneficiário" }}
           component={SignUp}
           options={{ tabBarLabel: "Beneficiário" }}
         />

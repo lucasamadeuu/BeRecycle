@@ -9,6 +9,7 @@ import Svgs from "../../../assets/images/svgs";
 import { useEffect, useState } from "react";
 import RegularText from "../../components/texts";
 import { hasEmail, hasPassword } from "../../context/validForm";
+import { GetUser } from "../../context/Integration";
 
 export default function Login({ navigation }) {
   const Logo = Svgs.logo;
@@ -18,6 +19,7 @@ export default function Login({ navigation }) {
   const [passwordError, setPasswordError] = useState("");
   const [notFound, setNotFound] = useState("");
   const [isSignUpClicked, setIsSignUpClicked] = useState(false);
+  const [user, setUser] = useState(null)
 
   useEffect(() => {
     if (isSignUpClicked) {
@@ -37,42 +39,36 @@ export default function Login({ navigation }) {
     }
   }, [isSignUpClicked, email, password]);
 
-  //FINGINDO ESTAR TRAZENDO DO BANCO
-  const users = [
-    {
-      email: "lucas",
-      password: "12345",
-      title: "student",
-    },
-    {
-      email: "gabriel@gmail.com",
-      password: "123456",
-      title: "doador",
-    },
-  ];
+  useEffect(() => {
+    if (user != null) {
 
-  const VerifyUser = () => {
+      if (user == '') {
+        setNotFound("E-mail ou senha incorretos");
+      } else {
+        if (user.type == "Doador") {
+          navigation.navigate("NavigationDoador", { userData: user });
+        } else if (user.type == "Beneficiário") {
+          navigation.navigate("NavigationBeneficiario", { userData: user });
+        } else {
+          navigation.navigate("NavigationTransportador", { userData: user });
+        }
+      }
+    }
+  }, [user]);
+
+  const VerifyUser = async () => {
     setIsSignUpClicked(true)
 
     if (passwordError == '' && emailError == '') {
-      const user = { email, password };
+      const data = {
+        email: email,
+        pass: password
+      };
 
-      const foundUser = users.find(
-        (u) => u.email === user.email && u.password === user.password
-      );
+      const userJSON = JSON.stringify(data);
 
-      if (foundUser) {
-        const userJSON = JSON.stringify(foundUser);
-        if (foundUser.title == "doador") {
-          navigation.navigate("NavigationDoador", { userData: userJSON });
-        } else if (foundUser.title == "beneficiario") {
-          navigation.navigate("NavigationBeneficiario", { userData: userJSON });
-        } else {
-          navigation.navigate("NavigationTransportador", { userData: userJSON });
-        }
-      } else {
-        setNotFound("E-mail ou senha incorretos");
-      }
+      await GetUser(setUser, 'login', userJSON)
+
     }
   };
 

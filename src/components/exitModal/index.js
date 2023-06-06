@@ -8,9 +8,8 @@ import RegularText from "../texts";
 
 export default function ExitModal({ navigation, route }) {
   const { userData } = route.params;
-  const { type, name } = JSON.parse(userData);
 
-  const partsName = name.split(" ");
+  const partsName = userData.name.split(" ");
   const firstName = partsName[0];
 
   const logout = () => {

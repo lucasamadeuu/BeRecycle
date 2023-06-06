@@ -1,6 +1,6 @@
 import { Pressable, ScrollView, Text, View } from "react-native";
 import SignUpForm from "../../components/signupform";
-import { useEffect, useReducer, useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "../../components/button";
 import Colors from "../../theme/colors";
 import RegularText from "../../components/texts";
@@ -9,6 +9,8 @@ import Svgs from "../../../assets/images/svgs";
 import SafeArea from "../../components/safeArea";
 import { SvgXml } from "react-native-svg";
 import style from "./style";
+import { postAxios } from "../../context/Integration";
+import Loading from "../../components/loading/index"
 
 export default function SignUp({ navigation, route }) {
     const { userType } = route.params;
@@ -21,13 +23,24 @@ export default function SignUp({ navigation, route }) {
     const [cep, setCep] = useState('')
     const [cnh, setCnh] = useState('')
     const [vehicle, setVehicle] = useState('')
+    const [signUpResp, setResp] = useState('')
+    const [isSignUpClicked, setIsSignUpClicked] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
+
+    console.log(signUpResp)
+
     const Logo = Svgs.logo;
 
     useEffect(() => {
         CallBack('type', userType)
     }, [])
 
-    const [isSignUpClicked, setIsSignUpClicked] = useState(false);
+    useEffect(() => {
+        if (signUpResp != '') {
+            setIsLoading(false)
+        }
+    }, [signUpResp])
+
 
     useEffect(() => {
         if (isSignUpClicked) {
@@ -84,7 +97,7 @@ export default function SignUp({ navigation, route }) {
         switch (userType) {
             case 'Doador':
                 return (form.name && form.email && form.cep && form.phone && form.cnpj && form.pass) ? true : false
-            case 'Beneficiario':
+            case 'Beneficiário':
                 return (form.name && form.email && form.cep && form.phone && form.pass) ? true : false
             case 'Transportador':
                 return (form.name && form.email && form.cep && form.phone && form.cnh && form.vehicle && form.pass) ? true : false
@@ -94,54 +107,35 @@ export default function SignUp({ navigation, route }) {
 
     }
 
-    const Route = () => {
-        // const userJSON = JSON.stringify(form);
+    const Route = async () => {
+        setIsLoading(true)
 
-        const teste = {
-            type: "Doador",
-            name: "Lucas Amadeu",
-            email: "lucas.amadeu.soares@gmail.com",
-            cep: "04115-060",
-            housenumber: "375",
-            phone: "(11) 95078-2114",
-            cnpj: "13.689.468/3134-97",
-            pass: "qpaozkska"
-        };
+        const userJSON = JSON.stringify(form);
 
-        const teste2 = {
-            type: "Beneficiario",
-            name: "Lucas Amadeu",
-            email: "lucas.amadeu.soares@gmail.com",
-            cep: "04115-060",
-            housenumber: "375",
-            phone: "(11) 95078-2114",
-            pass: "qpaozkska"
-        };
+        await postAxios(setResp, 'user', userJSON)
 
-        const userJSON = JSON.stringify(teste2);
+        // if (form.type == "Doador") {
+        //     navigation.navigate("NavigationDoador", { userData: userJSON });
+        // } else if (form.type == "Beneficiario") {
+        //     navigation.navigate("NavigationBeneficiario", { userData: userJSON });
+        // } else {
+        //     navigation.navigate("NavigationTransportador", { userData: userJSON });
+        // }
+    }
 
-        console.log(userJSON)
-
-        if (form.type == "Doador") {
-            navigation.navigate("NavigationDoador", { userData: userJSON });
-        } else if (form.type == "Beneficiario") {
-            navigation.navigate("NavigationBeneficiario", { userData: userJSON });
-        } else {
-            navigation.navigate("NavigationTransportador", { userData: userJSON });
-        }
+    if (isLoading) {
+        return <Loading />;
     }
 
     const SignUp = () => {
         setIsSignUpClicked(true)
-        // DESCOMENTAR DEPOIS
-        // ValidateForm()
-        Route()
+        ValidateForm()
     }
 
     const ValidateForm = () => {
         (Validate())
             ? Route()
-            : ''
+            : console.log("erro na validação")
     }
 
 
@@ -417,7 +411,7 @@ export default function SignUp({ navigation, route }) {
         switch (userType) {
             case 'Doador':
                 return formItems[0]
-            case 'Beneficiario':
+            case 'Beneficiário':
                 return formItems[1]
             default:
                 return formItems[2]

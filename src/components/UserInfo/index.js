@@ -6,8 +6,7 @@ import { View } from "react-native";
 import styles from "./style";
 
 export default function UserInfo({ userData }) {
-  const { name, title, type } = JSON.parse(userData);
-  const partsName = name.split(" ");
+  const partsName = userData.name.split(" ");
   const firstName = partsName[0];
   const lastName = partsName[partsName.length - 1];
   const capitalizedFirstName = firstName.charAt(0).toUpperCase() + firstName.slice(1);
@@ -23,13 +22,13 @@ export default function UserInfo({ userData }) {
           weight="Bold"
           color={Colors.primary}
           fontSize={18}
-          content={`Olá, ${title == "teacher" ? 'Prof. ' : ''}${allName}!`}
+          content={`Olá, ${allName}!`}
         />
         <RegularText
           weight="Regular"
           color={Colors.textLight}
           fontSize={11}
-          content={`Você está logado como ${type}`}
+          content={`Você está logado como ${userData.type}`}
         />
       </View>
       <View style={styles.letterIcon}>

@@ -12,8 +12,6 @@ import { TouchableOpacity } from "react-native";
 import InfoCard from "../InfoCard";
 
 export default function DonationCard({ donationData, navigation, userData }) {
-    const { type } = JSON.parse(userData);
-
     const CustomIcon = createIconSetFromFontello(
         require("../../../assets/images/config.json"),
         "fontello"
@@ -21,7 +19,7 @@ export default function DonationCard({ donationData, navigation, userData }) {
 
     const CardContent = [
         {
-            label: type,
+            label: donationData.type,
             content: donationData.name
         },
         {
@@ -42,7 +40,7 @@ export default function DonationCard({ donationData, navigation, userData }) {
     ]
 
     return (
-        <TouchableOpacity onPress={() => navigation.navigate("Donation", { userData: userData, CardContent: CardContent, donorContactInfo: donorContactInfo })}>
+        <TouchableOpacity onPress={() => navigation.navigate("Donation", { userData: userData, CardContent: CardContent, donorContactInfo: donorContactInfo, donationData: donationData })}>
             <View style={style.cardContainer}>
                 <View style={style.infoContainer}>
                     {CardContent.map((item, index) => {

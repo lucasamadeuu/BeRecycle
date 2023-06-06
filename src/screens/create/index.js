@@ -1,18 +1,17 @@
 import { useEffect, useState } from "react";
-import SafeArea from "../../../components/safeArea";
-import RegularText from "../../../components/texts";
-import UserInfo from "../../../components/UserInfo";
-import Colors from "../../../theme/colors";
-import global from "../../../theme/global";
+import SafeArea from "../../components/safeArea";
+import RegularText from "../../components/texts";
+import UserInfo from "../../components/UserInfo";
+import Colors from "../../theme/colors";
+import global from "../../theme/global";
 import { ScrollView, View } from "react-native";
-import { getAxios } from "../../../context/Integration";
-import CreateForm from "../../../components/createform";
-import { hasDescription, hasName } from "../../../context/validForm";
-import Button from "../../../components/button";
+import { getAxios } from "../../context/Integration";
+import CreateForm from "../../components/createform";
+import { hasDescription, hasName } from "../../context/validForm";
+import Button from "../../components/button";
 
 export default function CreateDonation({ route }) {
     const { userData } = route.params;
-    const { type, cep, phone, email, name } = JSON.parse(userData);
     const [cepData, setCepData] = useState(null);
     const [form, setForm] = useState({});
     const [isSignUpClicked, setIsSignUpClicked] = useState(false);
@@ -34,12 +33,13 @@ export default function CreateDonation({ route }) {
     }, [cepData]);
 
     useEffect(() => {
-        getAxios(setCepData, `https://cdn.apicep.com/file/apicep/${cep}.json`);
+        getAxios(setCepData, `https://cdn.apicep.com/file/apicep/${userData.cep}.json`);
 
         var clone = Object.assign({}, form);
-        clone['email'] = email;
-        clone['phone'] = phone;
-        clone['name'] = name;
+        clone['email'] = userData.email;
+        clone['phone'] = userData.phone;
+        clone['name'] = userData.name;
+        clone['type'] = userData.type;
         setForm(clone);
 
         setLoading(true);
@@ -72,6 +72,7 @@ export default function CreateDonation({ route }) {
 
     const Request = () => {
         const donationJSON = JSON.stringify(form);
+        console.log(donationJSON)
         // fazer post
     }
 
@@ -86,7 +87,7 @@ export default function CreateDonation({ route }) {
             name: 'description',
             label: 'Descrição *',
             value: form.description,
-            placeholder: type == "Doador" ? 'descrição da doação' : 'descrição dos materiais',
+            placeholder: userData.type == "Doador" ? 'descrição da doação' : 'descrição dos materiais',
             CallBack: CallBack,
             keyboard: 'default',
             max: 300,
@@ -137,7 +138,7 @@ export default function CreateDonation({ route }) {
                         <UserInfo userData={userData} />
                     </View>
                     <View>
-                        <RegularText weight='Bold' color={Colors.darkGrey} fontSize={18} content={`Informações ${type == 'Doador' ? "da doação" : "dos materiais"}`} />
+                        <RegularText weight='Bold' color={Colors.darkGrey} fontSize={18} content={`Informações ${userData.type == 'Doador' ? "da doação" : "dos materiais"}`} />
                     </View>
                     {isLoaded && <CreateForm formItems={formItems} contactItems={formItemsContact} />}
                     <Button
