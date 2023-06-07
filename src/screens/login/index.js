@@ -41,25 +41,20 @@ export default function Login({ navigation }) {
 
   useEffect(() => {
     if (user != null) {
-
-      if (user == '') {
-        setNotFound("E-mail ou senha incorretos");
+      if (user.type == "Doador") {
+        navigation.navigate("NavigationDoador", { userData: user });
+      } else if (user.type == "Beneficiário") {
+        navigation.navigate("NavigationBeneficiario", { userData: user });
+      } else if (user.type == "Transportador") {
+        navigation.navigate("NavigationTransportador", { userData: user });
       } else {
-        if (user.type == "Doador") {
-          navigation.navigate("NavigationDoador", { userData: user });
-        } else if (user.type == "Beneficiário") {
-          navigation.navigate("NavigationBeneficiario", { userData: user });
-        } else {
-          navigation.navigate("NavigationTransportador", { userData: user });
-        }
+        setNotFound("E-mail ou senha incorretos");
       }
     }
   }, [user]);
 
   const VerifyUser = async () => {
     setIsSignUpClicked(true)
-
-    console.log("oi")
 
     if (passwordError == '' && emailError == '') {
       const data = {
@@ -68,8 +63,6 @@ export default function Login({ navigation }) {
       };
 
       const userJSON = JSON.stringify(data);
-
-      console.log(data)
 
       await GetUser(setUser, 'login', userJSON)
     }
