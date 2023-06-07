@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 import RegularText from "../../components/texts";
 import { hasEmail, hasPassword } from "../../context/validForm";
 import { GetUser } from "../../context/Integration";
+import { Modal } from "react-native";
 
 export default function Login({ navigation }) {
   const Logo = Svgs.logo;
@@ -20,6 +21,7 @@ export default function Login({ navigation }) {
   const [notFound, setNotFound] = useState("");
   const [isSignUpClicked, setIsSignUpClicked] = useState(false);
   const [user, setUser] = useState(null)
+  const [showErrorModal, setShowErrorModal] = useState(false);
 
   useEffect(() => {
     if (isSignUpClicked) {
@@ -64,7 +66,10 @@ export default function Login({ navigation }) {
 
       const userJSON = JSON.stringify(data);
 
-      await GetUser(setUser, 'login', userJSON)
+      if (password != null && email != null) {
+        await GetUser(setUser, 'login', userJSON)
+      }
+
     }
   };
 
