@@ -59,6 +59,8 @@ export default function Login({ navigation }) {
   const VerifyUser = async () => {
     setIsSignUpClicked(true)
 
+    console.log("oi")
+
     if (passwordError == '' && emailError == '') {
       const data = {
         email: email,
@@ -66,6 +68,8 @@ export default function Login({ navigation }) {
       };
 
       const userJSON = JSON.stringify(data);
+
+      console.log(data)
 
       await GetUser(setUser, 'login', userJSON)
     }
